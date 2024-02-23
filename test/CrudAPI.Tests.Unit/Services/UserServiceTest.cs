@@ -36,7 +36,7 @@ public class UserServiceTest
     public void ClassCleanup() => _mock?.Dispose();
 
     [Test]
-    public void GetById_ProvideInvalidId_ThrowException()
+    public void GetById_ProvideInvalidId_ThrowsException()
     {
         // Arrange
         _context.SetReturnsDefault(_context.Object);
@@ -48,8 +48,5 @@ public class UserServiceTest
         Should.Throw<Exception>(() => service.GetById(0));
 
         // Assert
-        //user?.ShouldBe(null);
-        //user?.ShouldBeOfType<User>();
-        //user?.Id.ShouldBe(0);
     }
 }

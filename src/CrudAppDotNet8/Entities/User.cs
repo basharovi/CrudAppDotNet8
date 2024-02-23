@@ -11,5 +11,5 @@ public class User
     public Role Role { get; set; }
 
     [JsonIgnore]
-    public required string PasswordHash { get; set; }
+    public string? PasswordHash { get; set; }
 }

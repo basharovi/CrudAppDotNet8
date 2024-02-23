@@ -1,4 +1,3 @@
-using AutoMapper;
 using CrudAppDotNet8.Models.Users;
 using CrudAppDotNet8.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +9,14 @@ namespace CrudAppDotNet8.Controllers;
 public class UsersController : ControllerBase
 {
     private IUserService _userService;
-    private IMapper _mapper;
     private readonly ILogger<WeatherForecastController> _logger;
 
 
     public UsersController(
         IUserService userService,
-        IMapper mapper,
         ILogger<WeatherForecastController> logger)
     {
         _userService = userService;
-        _mapper = mapper;
         _logger = logger;
     }
 

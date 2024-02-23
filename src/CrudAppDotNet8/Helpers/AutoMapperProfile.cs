@@ -26,6 +26,10 @@ namespace CrudAppDotNet8.Helpers
                         return true;
                     }
                 ));
+
+
+            // User -> UserDto
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }
