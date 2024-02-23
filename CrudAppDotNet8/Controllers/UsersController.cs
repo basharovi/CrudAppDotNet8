@@ -1,3 +1,6 @@
+using AutoMapper;
+using CrudAppDotNet8.Models.Users;
+using CrudAppDotNet8.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrudAppDotNet8.Controllers
