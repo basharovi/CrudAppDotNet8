@@ -15,18 +15,14 @@ public interface IUserService
     void Delete(int id);
 }
 
-public class UserService : IUserService
-{
-    private DataContext _context;
-    private readonly IMapper _mapper;
-
-    public UserService(
+public class UserService
+    (
         DataContext context,
-        IMapper mapper)
-    {
-        _context = context;
-        _mapper = mapper;
-    }
+        IMapper mapper
+    ) : IUserService
+{
+    private readonly DataContext _context = context;
+    private readonly IMapper _mapper = mapper;
 
     public IEnumerable<User> GetAll()
     {
@@ -35,7 +31,7 @@ public class UserService : IUserService
 
     public User GetById(int id)
     {
-        return getUser(id);
+        return GetUser(id);
     }
 
     public void Create(CreateRequest model)
@@ -58,7 +54,7 @@ public class UserService : IUserService
 
     public void Update(int id, UpdateRequest model)
     {
-        var user = getUser(id);
+        var user = GetUser(id);
 
         // validate
         if (model.Email != user.Email && _context.Users.Any(x => x.Email == model.Email))
@@ -77,17 +73,17 @@ public class UserService : IUserService
 
     public void Delete(int id)
     {
-        var user = getUser(id);
+        var user = GetUser(id);
         _context.Users.Remove(user);
         _context.SaveChanges();
     }
 
-    // helper methods
+    // helper private methods
 
-    private User getUser(int id)
+    private User GetUser(int id)
     {
         var user = _context.Users.Find(id);
-        if (user == null) throw new KeyNotFoundException("User not found");
-        return user;
+
+        return user ?? throw new KeyNotFoundException("User not found");
     }
 }

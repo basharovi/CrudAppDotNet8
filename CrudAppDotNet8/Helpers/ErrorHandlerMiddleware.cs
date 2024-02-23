@@ -8,7 +8,8 @@ public class ErrorHandlerMiddleware
     private readonly RequestDelegate _next;
     private readonly ILogger _logger;
 
-    public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
+    public ErrorHandlerMiddleware(RequestDelegate next,
+        ILogger<ErrorHandlerMiddleware> logger)
     {
         _next = next;
         _logger = logger;
@@ -27,17 +28,17 @@ public class ErrorHandlerMiddleware
 
             switch (error)
             {
-                case AppException e:
+                case AppException:
                     // custom application error
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
-                case KeyNotFoundException e:
+                case KeyNotFoundException:
                     // not found error
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     break;
                 default:
                     // unhandled error
-                    _logger.LogError(error, error.Message);
+                    _logger.LogError(error, message: error.Message);
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
             }

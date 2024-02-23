@@ -3,60 +3,59 @@ using CrudAppDotNet8.Models.Users;
 using CrudAppDotNet8.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CrudAppDotNet8.Controllers
+namespace CrudAppDotNet8.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class UsersController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UsersController : ControllerBase
+    private IUserService _userService;
+    private IMapper _mapper;
+    private readonly ILogger<WeatherForecastController> _logger;
+
+
+    public UsersController(
+        IUserService userService,
+        IMapper mapper,
+        ILogger<WeatherForecastController> logger)
     {
-        private IUserService _userService;
-        private IMapper _mapper;
-        private readonly ILogger<WeatherForecastController> _logger;
+        _userService = userService;
+        _mapper = mapper;
+        _logger = logger;
+    }
 
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var users = _userService.GetAll();
+        return Ok(users);
+    }
 
-        public UsersController(
-            IUserService userService,
-            IMapper mapper,
-            ILogger<WeatherForecastController> logger)
-        {
-            _userService = userService;
-            _mapper = mapper;
-            _logger = logger;
-        }
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var user = _userService.GetById(id);
+        return Ok(user);
+    }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
-        }
+    [HttpPost]
+    public IActionResult Create(CreateRequest model)
+    {
+        _userService.Create(model);
+        return Ok(new { message = "User created" });
+    }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var user = _userService.GetById(id);
-            return Ok(user);
-        }
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, UpdateRequest model)
+    {
+        _userService.Update(id, model);
+        return Ok(new { message = "User updated" });
+    }
 
-        [HttpPost]
-        public IActionResult Create(CreateRequest model)
-        {
-            _userService.Create(model);
-            return Ok(new { message = "User created" });
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateRequest model)
-        {
-            _userService.Update(id, model);
-            return Ok(new { message = "User updated" });
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _userService.Delete(id);
-            return Ok(new { message = "User deleted" });
-        }
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        _userService.Delete(id);
+        return Ok(new { message = "User deleted" });
     }
 }
