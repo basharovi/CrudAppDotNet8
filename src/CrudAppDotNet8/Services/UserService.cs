@@ -8,8 +8,8 @@ namespace CrudAppDotNet8.Services;
 
 public interface IUserService
 {
-    IEnumerable<User> GetAll();
-    User GetById(int id);
+    IEnumerable<UserDto> GetAll();
+    UserDto GetById(int id);
     void Create(CreateRequest model);
     void Update(int id, UpdateRequest model);
     void Delete(int id);
@@ -24,14 +24,18 @@ public class UserService
     private readonly DataContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public IEnumerable<User> GetAll()
+    public IEnumerable<UserDto> GetAll()
     {
-        return _context.Users;
+        var users = _context.Users;
+
+        return _mapper.Map<IList<UserDto>>(users);
     }
 
-    public User GetById(int id)
+    public UserDto GetById(int id)
     {
-        return GetUser(id);
+        var user = GetUser(id);
+
+        return _mapper.Map<UserDto>(user);
     }
 
     public void Create(CreateRequest model)
