@@ -53,7 +53,9 @@ public sealed class UserControllerTest
         response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
 
         var content = await response.Content.ReadAsStringAsync();
-        var user = JsonSerializer.Deserialize<dynamic>(content);
+        var user = JsonSerializer.Deserialize<object>(content);
+
+        user.ShouldNotBeNull();
     }
 
     [Test]
