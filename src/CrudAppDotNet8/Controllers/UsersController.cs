@@ -38,20 +38,20 @@ public class UsersController : ControllerBase
     public IActionResult Create(CreateRequest model)
     {
         _userService.Create(model);
-        return Ok(new { message = "User created" });
+        return Ok(new { message = "User created successfully." });
     }
 
     [HttpPut("{id}")]
     public IActionResult Update(int id, UpdateRequest model)
     {
         _userService.Update(id, model);
-        return Ok(new { message = "User updated" });
+        return Ok(new { message = "User updated successfully." });
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
         _userService.Delete(id);
-        return Ok(new { message = "User deleted" });
+        return Ok(new { message = "User deleted successfully." });
     }
 }

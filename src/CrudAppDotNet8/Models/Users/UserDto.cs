@@ -2,9 +2,9 @@
 {
     public record UserDto
         (
-            int Id,
+            int? Id,
             string FirstName,
-            string LastName,
+            string? LastName,
             string Email,
             string Role
         );
