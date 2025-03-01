@@ -16,25 +16,25 @@ public class UpdateRequest
 
     // treat empty string as null for password fields to 
     // make them optional in front end apps
-    private string _password;
+    private string? _password;
     [MinLength(6)]
     public string Password
     {
-        get => _password;
+        get => _password ?? string.Empty;
         set => _password = ReplaceEmptyWithNull(value);
     }
 
-    private string _confirmPassword;
+    private string? _confirmPassword;
     [Compare("Password")]
     public string ConfirmPassword
     {
-        get => _confirmPassword;
+        get => _confirmPassword ?? string.Empty;
         set => _confirmPassword = ReplaceEmptyWithNull(value);
     }
 
     // helpers
 
-    private static string ReplaceEmptyWithNull(string value)
+    private static string? ReplaceEmptyWithNull(string value)
     {
         // replace empty string with null to make field optional
         return string.IsNullOrEmpty(value) ? null : value;

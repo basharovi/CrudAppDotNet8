@@ -9,7 +9,7 @@ namespace CrudAPI.Tests.Unit;
 public sealed class UserServiceTest
 {
     private AutoMock _mock;
-    private Mock<DataContext> _context;
+    private Mock<AppDbContext> _context;
     private Mock<IMapper> _mapper;
 
     [OneTimeSetUp] // This method is called only once before any tests are run
@@ -21,7 +21,7 @@ public sealed class UserServiceTest
     [SetUp] // This method is called before each test
     public void TestSetup()
     {
-        _context = _mock.Mock<DataContext>();
+        _context = _mock.Mock<AppDbContext>();
         _mapper = _mock.Mock<IMapper>();
     }
 

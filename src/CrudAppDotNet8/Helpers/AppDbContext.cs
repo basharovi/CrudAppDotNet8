@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace CrudAppDotNet8.Helpers;
 
-public class DataContext : DbContext
+public class AppDbContext : DbContext
 {
     protected readonly IConfiguration Configuration;
 
-    public DataContext(IConfiguration configuration)
+    public AppDbContext(IConfiguration configuration)
     {
         Configuration = configuration;
     }
 
-    public DataContext() { }
+    public AppDbContext() { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

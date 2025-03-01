@@ -8,13 +8,13 @@ namespace CrudAppDotNet8.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private IUserService _userService;
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IUserService _userService;
+    private readonly ILogger<UsersController> _logger;
 
 
     public UsersController(
         IUserService userService,
-        ILogger<WeatherForecastController> logger)
+        ILogger<UsersController> logger)
     {
         _userService = userService;
         _logger = logger;

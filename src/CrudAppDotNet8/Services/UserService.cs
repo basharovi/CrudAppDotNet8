@@ -17,11 +17,11 @@ public interface IUserService
 
 public class UserService
     (
-        DataContext context,
+        AppDbContext context,
         IMapper mapper
     ) : IUserService
 {
-    private readonly DataContext _context = context;
+    private readonly AppDbContext _context = context;
     private readonly IMapper _mapper = mapper;
 
     public IEnumerable<UserDto> GetAll()

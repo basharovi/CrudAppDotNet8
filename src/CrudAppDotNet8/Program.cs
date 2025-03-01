@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<DataContext>();
+builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddCors();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
