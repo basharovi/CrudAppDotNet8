@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace CrudAPI.Tests.Unit;
 
-public class UserServiceTest
+public sealed class UserServiceTest
 {
     private AutoMock _mock;
     private Mock<DataContext> _context;
